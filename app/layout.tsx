@@ -1,5 +1,6 @@
 import { ThemeProvider } from '@/components/provider/Theme-Provider';
 import ConvexClientProvider from '@/components/provider/convex-provider';
+import { ModalProvider } from '@/components/provider/modal-provider';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { Toaster } from 'sonner';
@@ -23,6 +24,7 @@ export default function RootLayout({
 				<ThemeProvider attribute='class' defaultTheme='system' enableSystem>
 					<ConvexClientProvider>
 						<Toaster position='bottom-center' />
+						<ModalProvider />
 						{children}
 					</ConvexClientProvider>
 				</ThemeProvider>
