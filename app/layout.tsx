@@ -22,7 +22,7 @@ export default function RootLayout({
 			<body className={inter.className}>
 				<ThemeProvider attribute='class' defaultTheme='system' enableSystem>
 					<ConvexClientProvider>
-						<Toaster richColors closeButton position='bottom-center' />
+						<Toaster position='bottom-center' />
 						{children}
 					</ConvexClientProvider>
 				</ThemeProvider>

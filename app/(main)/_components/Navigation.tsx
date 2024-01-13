@@ -1,7 +1,7 @@
 'use client';
 import { api } from '@/convex/_generated/api';
 import { cn } from '@/lib/utils';
-import { useMutation, useQuery } from 'convex/react';
+import { useMutation } from 'convex/react';
 import {
 	ChevronLeft,
 	MenuIcon,
@@ -13,13 +13,14 @@ import { usePathname } from 'next/navigation';
 import { ElementRef, useEffect, useRef, useState } from 'react';
 import { toast } from 'sonner';
 import { useMediaQuery } from 'usehooks-ts';
+import DocumentList from './DocumentList';
 import Item from './Item';
 import UserItem from './UserItem';
 
 export default function Navigation() {
 	const pathname = usePathname();
 	const isMobile = useMediaQuery('(max-width: 768px)');
-	const documents = useQuery(api.documents.get);
+
 	const create = useMutation(api.documents.create);
 
 	const isResizingRef = useRef(false);
@@ -138,9 +139,7 @@ export default function Navigation() {
 					<Item onClick={handleCreate} label='New page' icon={PlusCircle} />
 				</div>
 				<div className='mt-4'>
-					{documents?.map((document) => (
-						<p key={document._id}>{document.title}</p>
-					))}
+					<DocumentList />
 				</div>
 				<div
 					onMouseDown={handleMouseDown}
