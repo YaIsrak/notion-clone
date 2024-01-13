@@ -18,19 +18,21 @@ import {
 	Settings,
 	Trash,
 } from 'lucide-react';
-import { usePathname } from 'next/navigation';
+import { useParams, usePathname } from 'next/navigation';
 import { ElementRef, useEffect, useRef, useState } from 'react';
 import { toast } from 'sonner';
 import { useMediaQuery } from 'usehooks-ts';
 import DocumentList from './DocumentList';
 import Item from './Item';
 import UserItem from './UserItem';
+import { Navbar } from './navbar';
 import { TrashBox } from './trash-box';
 
 export default function Navigation() {
 	const search = useSearch();
 	const settings = useSettings();
 	const pathname = usePathname();
+	const params = useParams();
 	const isMobile = useMediaQuery('(max-width: 768px)');
 	const create = useMutation(api.documents.create);
 
@@ -175,15 +177,19 @@ export default function Navigation() {
 					isMobile && 'left-0 w-full'
 				)}
 			>
-				<nav className='bg-transparent px-3 py-2 w-full'>
-					{isCollapsed && (
-						<MenuIcon
-							className='h-6 w-6 text-muted-foreground'
-							role='button'
-							onClick={resetWidth}
-						/>
-					)}
-				</nav>
+				{!!params.documentId ? (
+					<Navbar isCollapsed={isCollapsed} onResetWidth={resetWidth} />
+				) : (
+					<nav className='bg-transparent px-3 py-2 w-full'>
+						{isCollapsed && (
+							<MenuIcon
+								className='h-6 w-6 text-muted-foreground'
+								role='button'
+								onClick={resetWidth}
+							/>
+						)}
+					</nav>
+				)}
 			</div>
 		</>
 	);
