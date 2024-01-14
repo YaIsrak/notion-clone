@@ -5,8 +5,8 @@ import {
 	PopoverTrigger,
 } from '@/components/ui/popover';
 import { api } from '@/convex/_generated/api';
-import { useSearch } from '@/hooks/use-Search';
 import { useSettings } from '@/hooks/use-settings';
+import { useSearch } from '@/hooks/useSearch';
 import { cn } from '@/lib/utils';
 import { useMutation } from 'convex/react';
 import {
